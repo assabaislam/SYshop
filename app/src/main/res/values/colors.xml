@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navy_dark">#0E1A36</color>
+    <color name="navy_button">#081734</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_bg">#F5F6FA</color>
+    <color name="chip_gray">#ECEFF4</color>
+    <color name="text_gray_dark">#555C77</color> <!-- Improved contrast for accessibility -->
+    <color name="offer_bg">#F6E7CF</color>
+    <color name="black_soft">#333333</color>
+    <color name="paton_blue">#cae3ff</color>
+    <color name="white_semi_transparent">#88FFFFFF</color>
+    <color name="search_hint_color">#757575</color>
+    <color name="text_gray">#757575</color>
+    <color name="description_gray">#616161</color>
+    <color name="price_green">#2E7D32</color><!-- Darker hint for contrast -->
+</resources>

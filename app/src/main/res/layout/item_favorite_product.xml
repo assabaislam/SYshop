@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Image Background Area -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageAreaBg"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="#F7F8FA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Slanted" />
+
+        <!-- Product Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/favoriteItemImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/content_desc_product"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintBottom_toBottomOf="@id/imageAreaBg"
+            app:layout_constraintEnd_toEndOf="@id/imageAreaBg"
+            app:layout_constraintStart_toStartOf="@id/imageAreaBg"
+            app:layout_constraintTop_toTopOf="@id/imageAreaBg"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Slanted" />
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/favoriteItemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/product_name_placeholder"
+            android:textColor="@color/navy_button"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/removeFavoriteBtn"
+            app:layout_constraintStart_toEndOf="@id/imageAreaBg"
+            app:layout_constraintTop_toTopOf="@id/imageAreaBg" />
+
+        <!-- Tag Badge -->
+        <TextView
+            android:id="@+id/favoriteItemTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_category_normal"
+            android:includeFontPadding="false"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:text="@string/product_tag_best_seller"
+            android:textAllCaps="true"
+            android:textColor="@color/text_gray_dark"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/favoriteItemName"
+            app:layout_constraintTop_toBottomOf="@id/favoriteItemName" />
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/favoriteItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_price_placeholder"
+            android:textColor="@color/navy_button"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/imageAreaBg"
+            app:layout_constraintStart_toStartOf="@id/favoriteItemName" />
+
+        <!-- Remove Button -->
+        <ImageView
+            android:id="@+id/removeFavoriteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/remove_from_favorites"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_favorite_filled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
