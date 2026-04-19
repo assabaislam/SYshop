@@ -11,18 +11,36 @@ public class CartManager {
     private static final List<CartItem> cartItems = new ArrayList<>();
 
     public static void addToCart(Product product) {
+        addToCart(product, 1);
+    }
+
+    public static void addToCart(Product product, int quantity) {
+        if (product == null || quantity <= 0) {
+            return;
+        }
+
         for (CartItem item : cartItems) {
             if (item.getProduct().getId() == product.getId()) {
-                item.increaseQuantity();
+                for (int i = 0; i < quantity; i++) {
+                    item.increaseQuantity();
+                }
                 return;
             }
         }
 
-        cartItems.add(new CartItem(product, 1));
+        cartItems.add(new CartItem(product, quantity));
     }
 
     public static List<CartItem> getCartItems() {
         return cartItems;
+    }
+
+    public static void replaceCartItems(List<CartItem> items) {
+        cartItems.clear();
+
+        if (items != null && !items.isEmpty()) {
+            cartItems.addAll(items);
+        }
     }
 
     public static int getCartCount() {

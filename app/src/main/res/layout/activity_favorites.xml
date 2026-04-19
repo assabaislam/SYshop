@@ -3,19 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/light_bg">
+    android:background="@color/light_bg"
+    android:orientation="vertical">
 
-    <!-- ═══ HEADER ═══ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header"
         android:orientation="vertical"
         android:paddingStart="@dimen/spacing_xlarge"
-        android:paddingTop="@dimen/spacing_xlarge"
+        android:paddingTop="30dp"
         android:paddingEnd="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium">
+        android:paddingBottom="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,11 +23,11 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/cartContainer"
-                android:orientation="vertical"
-                android:layout_marginEnd="@dimen/spacing_small">
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,7 +60,8 @@
                     android:background="@drawable/bg_circle_icon"
                     android:contentDescription="@string/content_desc_cart"
                     android:padding="11dp"
-                    android:src="@drawable/ic_cart" />
+                    android:src="@drawable/ic_cart"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/cartBadgeText"
@@ -81,44 +81,47 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <!-- ═══ CONTENT ═══ -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingStart="@dimen/spacing_large"
-        android:paddingTop="@dimen/spacing_tiny"
+        android:paddingTop="16dp"
         android:paddingEnd="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_small">
+        android:paddingBottom="@dimen/spacing_medium">
 
         <TextView
             android:id="@+id/favoritesEmptyText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/bg_empty_state"
+            android:gravity="center"
+            android:padding="28dp"
             android:text="@string/favorites_empty"
-            android:textColor="@color/text_gray"
+            android:textColor="@color/text_gray_dark"
             android:textSize="@dimen/text_large" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoritesRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
-            android:overScrollMode="always" />
+            android:clipToPadding="false"
+            android:layoutAnimation="@anim/layout_list_enter"
+            android:overScrollMode="always"
+            android:paddingBottom="8dp" />
     </FrameLayout>
 
-    <!-- Bottom Nav -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/bottom_nav_height"
         android:background="@drawable/bg_bottom_nav"
         app:backgroundTint="@color/white"
-        app:itemIconSize="20dp"
-        app:itemTextColor="@color/bottom_nav_colors"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconSize="22dp"
         app:itemIconTint="@color/bottom_nav_colors"
+        app:itemTextColor="@color/bottom_nav_colors"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_menu" />
 

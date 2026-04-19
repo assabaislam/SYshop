@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.SYshop.models.CartItem;
 import com.example.SYshop.managers.CartManager;
 import com.example.SYshop.models.Product;
+import com.example.SYshop.database.CartSyncRepository;
 import com.example.SYshop.R;
 import com.example.SYshop.utils.Navigator;
+import com.example.SYshop.utils.ProductImageLoader;
 
 
 import androidx.annotation.NonNull;
@@ -27,6 +26,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final Context context;
     private final List<CartItem> cartList;
     private final OnCartChangedListener listener;
+    private final CartSyncRepository cartSyncRepository;
 
     public interface OnCartChangedListener {
         void onCartChanged();
@@ -36,6 +36,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.context = context;
         this.cartList = cartList;
         this.listener = listener;
+        this.cartSyncRepository = new CartSyncRepository(context);
     }
 
     @NonNull
@@ -55,20 +56,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.cartItemPrice.setText(product.getPrice());
         holder.quantityText.setText(String.valueOf(cartItem.getQuantity()));
         
-        Glide.with(context)
-                .load(product.getImageRes())
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(android.R.drawable.ic_menu_gallery)
-                .into(holder.cartItemImage);
+        ProductImageLoader.loadCenterCrop(
+                holder.cartItemImage,
+                product.getImageUrl(),
+                product.getPreferredLocalImageRes()
+        );
 
         holder.plusBtn.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 CartManager.increaseQuantity(adapterPosition);
+                CartItem item = cartList.get(adapterPosition);
+                cartSyncRepository.updateQuantity(
+                        item.getProduct().getId(),
+                        item.getQuantity(),
+                        null
+                );
                 notifyDataSetChanged();
-
                 if (listener != null) {
                     listener.onCartChanged();
                 }
@@ -78,7 +82,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.minusBtn.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
             if (adapterPosition != RecyclerView.NO_POSITION) {
+                CartItem item = cartList.get(adapterPosition);
                 CartManager.decreaseQuantity(adapterPosition);
+                if (item.getQuantity() <= 1) {
+                    cartSyncRepository.removeItem(item.getProduct().getId(), null);
+                } else {
+                    cartSyncRepository.updateQuantity(
+                            item.getProduct().getId(),
+                            item.getQuantity(),
+                            null
+                    );
+                }
                 notifyDataSetChanged();
 
                 if (listener != null) {

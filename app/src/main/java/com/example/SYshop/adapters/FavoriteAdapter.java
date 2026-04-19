@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.SYshop.database.FavoriteCacheRepository;
+import com.example.SYshop.database.FavoriteSyncRepository;
 import com.example.SYshop.managers.FavoriteManager;
 import com.example.SYshop.models.Product;
 import com.example.SYshop.R;
 import com.example.SYshop.utils.Navigator;
+import com.example.SYshop.utils.ProductImageLoader;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +25,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     private final Context context;
     private final List<Product> favoriteList;
     private final OnFavoriteChangedListener listener;
+    private final FavoriteCacheRepository favoriteCacheRepository;
+    private final FavoriteSyncRepository favoriteSyncRepository;
 
     public interface OnFavoriteChangedListener {
         void onFavoriteChanged();
@@ -34,6 +36,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         this.context = context;
         this.favoriteList = favoriteList;
         this.listener = listener;
+        this.favoriteCacheRepository = new FavoriteCacheRepository(context);
+        this.favoriteSyncRepository = new FavoriteSyncRepository(context);
     }
 
     @NonNull
@@ -51,19 +55,21 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.favoriteItemTag.setText(product.getTag());
         holder.favoriteItemPrice.setText(product.getPrice());
         
-        Glide.with(context)
-                .load(product.getImageRes())
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(android.R.drawable.ic_menu_gallery)
-                .into(holder.favoriteItemImage);
+        ProductImageLoader.loadCenterCrop(
+                holder.favoriteItemImage,
+                product.getImageUrl(),
+                product.getPreferredLocalImageRes()
+        );
 
         holder.removeFavoriteBtn.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                FavoriteManager.removeFavorite(adapterPosition);
-                notifyDataSetChanged();
+                Product current = favoriteList.get(adapterPosition);
+                FavoriteManager.removeFavoriteById(current.getId());
+                favoriteCacheRepository.removeFavorite(current.getId());
+                favoriteSyncRepository.removeFavorite(current, null);
+                favoriteList.remove(adapterPosition);
+                notifyItemRemoved(adapterPosition);
 
                 if (listener != null) {
                     listener.onFavoriteChanged();

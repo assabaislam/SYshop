@@ -2,13 +2,19 @@
 
     <style name="Theme.ShopEase" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/navy_button</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/light_bg</item>
         <item name="android:statusBarColor">@color/navy_dark</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
         <item name="bottomNavigationStyle">@style/ModernBottomNavStyle</item>
     </style>
 
     <style name="ModernBottomNavStyle" parent="Widget.Material3.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_nav_colors</item>
         <item name="itemTextColor">@color/bottom_nav_colors</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavActive</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavInactive</item>
     </style>
     <style name="BottomNavActive">
         <item name="android:textSize">10sp</item>
