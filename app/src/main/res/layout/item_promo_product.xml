@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/promo_card_width"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/spacing_small"
-    android:layout_marginBottom="4dp"
+    android:layout_marginBottom="6dp"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="20dp"
-    app:cardElevation="2dp">
+    app:cardElevation="3dp"
+    app:strokeColor="@color/card_stroke"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <!-- Image Background Area -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageAreaBg"
             android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:background="#F7F8FA"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_image_surface"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Slanted" />
 
-        <!-- Product Image -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgPromoProduct"
             android:layout_width="0dp"
@@ -39,89 +41,103 @@
             app:layout_constraintTop_toTopOf="@id/imageAreaBg"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Slanted" />
 
-        <!-- Tag Badge -->
+        <ImageView
+            android:id="@+id/imgPromoFav"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_icon_surface"
+            android:contentDescription="@string/content_desc_favorite"
+            android:padding="7dp"
+            android:src="@drawable/ic_favorite_border"
+            app:layout_constraintStart_toStartOf="@id/imageAreaBg"
+            app:layout_constraintTop_toTopOf="@id/imageAreaBg" />
+
         <TextView
             android:id="@+id/txtPromoTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/bg_category_normal"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_dark_tag_badge"
             android:includeFontPadding="false"
-            android:paddingStart="6dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="6dp"
-            android:paddingBottom="2dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
             android:text="@string/product_tag_promo"
             android:textAllCaps="true"
-            android:textColor="@color/text_gray_dark"
+            android:textColor="@color/white"
             android:textSize="8sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/imageAreaBg"
-            app:layout_constraintTop_toTopOf="@id/imageAreaBg" />
+            app:layout_constraintBottom_toBottomOf="@id/imageAreaBg"
+            app:layout_constraintStart_toStartOf="@id/imageAreaBg" />
 
-        <!-- Favorite Heart -->
-        <ImageView
-            android:id="@+id/imgPromoFav"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:contentDescription="@string/content_desc_favorite"
-            android:src="@drawable/ic_favorite_border"
-            app:layout_constraintEnd_toEndOf="@id/imageAreaBg"
-            app:layout_constraintTop_toTopOf="@id/imageAreaBg" />
-
-        <!-- Product Name -->
         <TextView
             android:id="@+id/txtPromoName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:minLines="2"
+            android:minLines="1"
             android:text="@string/product_name_placeholder"
-            android:textColor="@color/navy_button"
-            android:textSize="13sp"
+            android:textColor="@color/black_soft"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageAreaBg" />
 
-        <!-- Price -->
         <TextView
             android:id="@+id/txtPromoPrice"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@string/product_price_placeholder"
-            android:textColor="@color/navy_button"
-            android:textSize="14sp"
+            android:textColor="@color/accent_coral_dark"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btnPromoAdd"
-            app:layout_constraintEnd_toStartOf="@id/btnPromoAdd"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/btnPromoAdd" />
 
-        <!-- Add Button -->
+        <TextView
+            android:id="@+id/txtPromoOldPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+            android:text="@string/product_price_placeholder"
+            android:textColor="@color/text_gray"
+            android:textSize="13sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/btnPromoAdd"
+            app:layout_constraintEnd_toStartOf="@id/btnPromoAdd"
+            app:layout_constraintStart_toEndOf="@id/txtPromoPrice"
+            app:layout_constraintTop_toTopOf="@id/btnPromoAdd" />
+
         <TextView
             android:id="@+id/btnPromoAdd"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_add_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_add_outline_button"
             android:gravity="center"
             android:text="@string/plus"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textColor="@color/black_soft"
+            android:textSize="22sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtPromoName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

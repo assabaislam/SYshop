@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "740416238200",
+    "project_id": "syshop-394ac",
+    "storage_bucket": "syshop-394ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740416238200:android:1728e52c0a9b316d59f38d",
+        "android_client_info": {
+          "package_name": "com.example.SYshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740416238200-4rkok0vg6rff4o2ao991v2pghfdp86ga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.SYshop",
+            "certificate_hash": "e4db093f402f88d54813a4932c6f441c35d969b8"
+          }
+        },
+        {
+          "client_id": "740416238200-ep5kg0a8iurmg9q10h312vdejnukeclv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcpIB5fGSFMTBD3X4k01weSbd1Q6pIe8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740416238200-ep5kg0a8iurmg9q10h312vdejnukeclv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

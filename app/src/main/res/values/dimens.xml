@@ -11,6 +11,7 @@
     <dimen name="text_detail_price">22sp</dimen>
     <dimen name="text_welcome">15sp</dimen>
     <dimen name="text_logo">27sp</dimen>
+    <dimen name="text_display">32sp</dimen>
 
     <!-- Margins & Padding -->
     <dimen name="spacing_tiny">4dp</dimen>
@@ -30,8 +31,9 @@
     <dimen name="product_image_height">120dp</dimen>
     <dimen name="product_detail_image_height">200dp</dimen>
     <dimen name="thumbnail_size">70dp</dimen>
-    <dimen name="promo_card_width">140dp</dimen>
-    <dimen name="promo_card_height">220dp</dimen>
+    <dimen name="promo_card_width">132dp</dimen>
+    <dimen name="promo_card_height">248dp</dimen>
     <dimen name="button_height_large">56dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="bottom_nav_height">88dp</dimen>
 </resources>
